@@ -1,20 +1,16 @@
-import xlsxwriter
+import openpyxl
 
-name = 'Beoordelingsformulier Nilan Bais 2020 - kopie.xlsx'
+name = 'Calculatie Exploitatie Rijnlandroute versie 0.14.xlsx'
 input_filename = f'doc\\{name}'
 output_filename = f'doc\\test-{name}'
 
-workbook = xlsxwriter.Workbook(input_filename, {'in_memory': True})
+input_file = openpyxl.load_workbook(input_filename)
 
-# worksheet = workbook.get_worksheet_by_name()
-print(workbook.sheetnames)
+print(input_file.sheetnames)
 
-# for sheet in workbook.sheetnames:
-#
+props = input_file.properties
 
-workbook.set_properties({
-    'title': 'test',
-    'subject': 'testtest'
-})
+props.title = 'testtest'
+props.keywords = 'keytest a mattie'
 
-workbook.close()
+input_file.save(input_filename)
